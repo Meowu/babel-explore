@@ -207,6 +207,7 @@ const validTypeOpts = [
 ];
 const validFieldKeys = ["default", "optional", "validate"];
 
+// builders, fields, visitors, aliases, etc... 有什么区别，分别是用来做什么。
 export default function defineType(
   type: string,
   opts: {
