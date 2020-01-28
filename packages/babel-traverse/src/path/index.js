@@ -48,8 +48,8 @@ export default class NodePath {
     this.type = null;
   }
 
-  parent: Object;
-  hub: HubInterface;
+  parent: Object /** Node */;
+  hub: HubInterface; // 定义了一些方法 getCode, getScope...
   contexts: Array<TraversalContext>;
   data: Object;
   shouldSkip: boolean;
@@ -61,13 +61,14 @@ export default class NodePath {
   skipKeys: ?Object;
   parentPath: ?NodePath;
   context: TraversalContext;
-  container: ?Object | Array<Object>;
-  listKey: ?string;
-  key: ?string;
+  container: ?Object | Array<Object>;  // container 具体是什么。
+  listKey: ?string; /** 指的是 node 中的值是一个列表的属性的 key， this.node[listKey]，通过它可以或者 当前 path 所在的 list，也就是 container 。 */
+  key: ?string; /** path.key 实际上是一个数字。 */
   node: ?Object;
   scope: Scope;
-  type: ?string;
+  type: ?string; // this.node.type 
 
+  // sibling 方法都调用这个方法通过 key 来获取同辈路径节点。
   static get({ hub, parentPath, parent, container, listKey, key }): NodePath {
     if (!hub && parentPath) {
       hub = parentPath.hub;
@@ -93,7 +94,8 @@ export default class NodePath {
         break;
       }
     }
-
+    
+    // 没有的话会创建一个新的 path 。
     if (!path) {
       path = new NodePath(hub, parent);
       paths.push(path);

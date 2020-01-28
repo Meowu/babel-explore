@@ -235,7 +235,7 @@ export function setup(parentPath, container, listKey, key) {
 
 export function setKey(key) {
   this.key = key;
-  this.node = this.container[this.key];
+  this.node = this.container[this.key]; // 妙！setKey之前，已经把 key 的位置空出来了，所以它不会为空。
   this.type = this.node && this.node.type;
 }
 
