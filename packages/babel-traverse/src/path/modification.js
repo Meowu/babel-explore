@@ -49,8 +49,10 @@ export function insertBefore(nodes) {
 }
 
 export function _containerInsert(from, nodes) {
+  // 插入节点，从 path.parent 获取所有 path 然后从 from 之后的所有 path.key 都递增。
   this.updateSiblingKeys(from, nodes.length);
 
+  // 返回的是一个新的 paths 列表。
   const paths = [];
 
   this.container.splice(from, 0, ...nodes);
@@ -212,6 +214,7 @@ export function unshiftContainer(listKey, nodes) {
 
   // get the first path and insert our nodes before it, if it doesn't exist then it
   // doesn't matter, our nodes will be inserted anyway
+  // 如果 path key 不存在就创建一个。
   const path = NodePath.get({
     parentPath: this,
     parent: this.node,
