@@ -63,7 +63,7 @@ export function injectInitialization(path, constructor, nodes, renamer) {
       newConstructor.params = [t.restElement(t.identifier("args"))];
       newConstructor.body.body.push(template.statement.ast`super(...args)`);
     }
-
+    // magic！
     [constructor] = path.get("body").unshiftContainer("body", newConstructor);
   }
 
