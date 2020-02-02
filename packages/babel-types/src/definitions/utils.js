@@ -211,13 +211,14 @@ const validFieldKeys = ["default", "optional", "validate"];
 export default function defineType(
   type: string,
   opts: {
+    // 字段
     fields?: {
       [string]: FieldOptions,
     },
     visitor?: Array<string>,
     aliases?: Array<string>,
-    builder?: Array<string>,
-    inherits?: string,
+    builder?: Array<string>, // 构建一个 node 需要的参数，通过 fields 来决定参数是否可选。
+    inherits?: string, // 继承于哪个 node 类型，如果 ClassDeclaration < ClassExpression 。
     deprecatedAlias?: string,
     validate?: Validator,
   } = {},
@@ -245,6 +246,7 @@ export default function defineType(
   const builder: Array<string> =
     opts.builder || inherits.builder || opts.visitor || [];
 
+  // 检查是否有多余的字段。
   for (const k of (Object.keys(opts): Array<string>)) {
     if (validTypeOpts.indexOf(k) === -1) {
       throw new Error(`Unknown type option "${k}" on ${type}`);
