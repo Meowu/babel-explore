@@ -69,6 +69,7 @@ export default class NodePath {
   type: ?string; // this.node.type 
 
   // sibling 方法都调用这个方法通过 key 来获取同辈路径节点。
+  // 获取一个 nodePath 如果没有就创建一个新的，并且将其插入到上下文中。
   static get({ hub, parentPath, parent, container, listKey, key }): NodePath {
     if (!hub && parentPath) {
       hub = parentPath.hub;
