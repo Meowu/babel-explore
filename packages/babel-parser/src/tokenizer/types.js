@@ -23,7 +23,9 @@
 // to know when parsing a label, in order to allow or disallow
 // continue jumps to that label.
 
-const beforeExpr = true;
+// 1 -> 20200204
+
+const beforeExpr = true; // 表示这个 token 后面能否跟一个表达式。比如 ` 只能跟字符串，${ 可以跟表达式。
 const startsExpr = true;
 const isLoop = true;
 const isAssign = true;
@@ -65,7 +67,7 @@ export class TokenType {
     this.isAssign = !!conf.isAssign;
     this.prefix = !!conf.prefix;
     this.postfix = !!conf.postfix;
-    this.binop = conf.binop != null ? conf.binop : null;
+    this.binop = conf.binop != null ? conf.binop : null; // binary operator
     this.updateContext = null;
   }
 }
